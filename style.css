@@ -2,11 +2,16 @@
 
 :root {
 
-    --primary-clr: #61DAFB;
-    --dark-navy: #20232A;
-    --med-navy: #282C34;
-    --light-navy: #343943;
-    --nav-bg: #1b1d23c6;
+    /* --primary-clr: #61DAFB; */
+    --primary-clr: #9773f9;
+    /* --dark-navy: #20232A; */
+    --dark-navy: #191428;
+    /* --med-navy: #282C34; */
+    --med-navy: #201932;
+    /* --light-navy: #343943; */
+    --light-navy: #2a2141;
+    /* --nav-bg: #1b1d23c6; */
+    --nav-bg: #151122c7;
 
     --light: #eeeeee;
     --dark: #111111;
@@ -25,7 +30,7 @@
     --fs-600: 2.4rem;
     --fs-700: 3rem;
     --fs-800: 4.5rem;
-    --fs-900: 8rem;
+    --fs-900: 7rem;
 
     --fs-body: var(--fs-400);
     --fs-nav: var(--fs-400);
@@ -33,6 +38,24 @@
 
     --fs-primary-heading: var(--fs-900);
     --fs-secondary-heading: var(--fs-800);
+}
+
+@media (max-width: 70em) {
+    :root{
+        --fs-900: 5.5rem;
+    }
+    .projects_section .projects_content{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    main{
+        margin-top: 15rem;
+    }
+    .hero_section .container{
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 50em) {
@@ -81,6 +104,14 @@
     .header .container .navbar{
         display: none;
     }
+    .container {
+        --padding: 5rem !important;
+    }
+    .projects_section .projects_content{
+        place-items: center;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
 }
 
 @media (max-width: 30em) {
@@ -100,20 +131,20 @@
         --fs-secondary-heading: var(--fs-800);
     }
     .hero_section .container .indian_flag span{
-        height: 1rem;
+        height: 1rem !important;
     }
     .hero_section .container .indian_flag span.saffron{
-        width: 4rem;
+        width: 2rem !important;
     }
     .hero_section .container .indian_flag span.white{
-        width: 8rem;
+        width: 4rem !important;
     }
     .hero_section .container .indian_flag span.green{
-        width: 12rem;
+        width: 6rem !important;
     }
-    .hero_section .container h2{
-        font-size: 1.8rem;
-        letter-spacing: 4px;
+    .hero_section .container h2, .hero_section .container .hero_content h2.designation span{
+        font-size: 1.6rem;
+        letter-spacing: 2px;
     }
     .hero_section .container .hero-btn{
         padding: 1rem 2rem;
@@ -124,6 +155,12 @@
     }
     .form_content form .row1{
         grid-template-columns: repeat(1, 1fr);
+    }
+    main #scroll_down{
+        bottom: -10%;
+    }
+    .projects_section .project_card::before{
+        top: 25px !important;
     }
 }
 
@@ -170,6 +207,7 @@ body {
     line-height: 1.5;
     font-size: var(--ff-body);
     background-color: var(--dark-navy);
+    overflow-x: hidden;
 }
 
 a {
@@ -241,12 +279,11 @@ li {
 
 .primary-button {
     background: var(--primary-clr);
-    color: var(--dark-navy);
-    border: none;
+    color: var(--dark);
     outline: none;
     padding: 1rem 2.4rem;
     font-size: var(--fs-400);
-    font-weight: 600;
+    font-weight: 700 !important;
     border-radius: 0.6rem;
     letter-spacing: 0.5px;
     display: inline-block;
@@ -255,13 +292,12 @@ li {
 }
 
 .primary-button:hover,.primary-button:focus {
-    box-shadow: 0 0 20px #61dafb7c;
+    box-shadow: 0 0 20px #9773f97c;
 }
 
 .secondary-button {
     background: transparent;
     color: var(--primary-clr);
-    border: none;
     outline: none;
     padding: 1rem 2.4rem;
     font-size: var(--fs-400);
@@ -274,7 +310,7 @@ li {
 }
 
 .secondary-button:hover, .secondary-button:focus {
-    background: #61dafb22;
+    background: #9773f929;
     color: var(--primary-clr);
 }
 
@@ -305,7 +341,7 @@ li {
 
 .container {
     --max-width: 1400px;
-    --padding: 3rem;
+    --padding: 10rem;
 
     width: min(var(--max-width), 100% - var(--padding));
     margin-inline: auto;
@@ -363,19 +399,31 @@ li {
     color: var(--dark-grey);
 }
 
+#cursor_blur{
+    height: 300px;
+    width: 300px;
+    background-color: #9773f930;
+    border-radius: 50%;
+    position: fixed;
+    filter: blur(100px);
+}
 
 /* ---------------- Header Section CSS ------------------ */
 
 .header {
     position: fixed;
-    top: 0;
-    left: 0;
+    left: 0%;
+    top: 0%;
     min-height: 8rem;
     width: 100%;
     z-index: 10;
-    background-color: var(--nav-bg);
     backdrop-filter: blur(10px);
     transition: all .3s ease-in-out;
+}
+
+.header.sticky{
+    background-color: var(--nav-bg);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 .brand-logo svg {
@@ -390,6 +438,7 @@ li {
     color: var(--dark-grey);
     padding: 1.4rem;
     transition: all .3s ease;
+    font-weight: 500;
     font-size: var(--fs-nav);
 }
 
@@ -408,14 +457,28 @@ main {
     width: 100%;
 }
 
+main .graphics{
+    width: 110rem;
+    height: 110rem;
+    background-color: #282c348e;
+    position: absolute;
+    right: -45%;
+    top: 0;
+    transform: rotate(45deg);
+    border-radius: 1rem;
+    border-left: 2px solid #61dafb7a;
+}
+
+
 .hero_section {
     position: relative;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width: 100%;
     display: flex;
     align-items: center;
+    margin-top: 8rem;
 }
-/* 
+
 .hero_section::before {
     content: '';
     position: absolute;
@@ -440,19 +503,20 @@ main {
     border-radius: 50%;
     filter: blur(250px);
     -webkit-filter: blur(250px);
-} */
+} 
 
 .hero_section .container {
     z-index: 1;
+    /* margin-top: -10rem; */
 }
 
 
-.hero_section .indian_flag {
+.hero_section .hero_content .indian_flag {
     position: relative;
     margin-bottom: 4rem;
 }
 
-.hero_section .indian_flag span {
+.hero_section .hero_content .indian_flag span {
     position: absolute;
     top: 0;
     left: 0;
@@ -460,17 +524,17 @@ main {
     border-radius: 10rem;
 }
 
-.hero_section .indian_flag span.saffron {
+.hero_section .hero_content .indian_flag span.saffron {
     width: 5rem;
     background-color: var(--saffron);
 }
 
-.hero_section .indian_flag span.white {
+.hero_section .hero_content .indian_flag span.white {
     width: 10rem;
     background-color: var(--white);
 }
 
-.hero_section .indian_flag span.green {
+.hero_section .hero_content .indian_flag span.green {
     width: 15rem;
     background-color: var(--green);
 }
@@ -508,12 +572,17 @@ main {
     font-weight: 600;
 }
 
+.hero_section .hero_image img{
+    width: 100rem;
+    height: auto;
+}
+
 /* ---------------- Mouse Wheel Scroll CSS ------------------ */
 
 .mouse-scroll-animation {
     position: absolute;
     left: 50%;
-    bottom: 5%;
+    bottom: -5%;
     transform: translate(-50%, -5%);
 	display: block;
 	margin: 0 auto;
@@ -844,7 +913,6 @@ main {
 
 .services-card {
     background: var(--med-navy);
-    box-shadow: 5px 5px 20px 0px #1b1d23c6;
     border-radius: 2rem;
     text-align: center;
     display: flex;
@@ -854,6 +922,14 @@ main {
     padding: 6.4rem 3.2rem;
     cursor: pointer;
     transition: all .3s ease;
+    backdrop-filter: blur(5px);
+  	-webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, .25);
+    border-radius: 20px;
+    /* background-color: rgba(0, 0, 0, 0.4); */
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+
+  backdrop-filter: blur(15px);
 }
 
 .services-card:hover {
@@ -864,7 +940,7 @@ main {
     position: relative;
     /* color: var(--light); */
     color: var(--primary-clr);
-    background: #61dafb30;
+    background: #9773f931;
     padding: 1.6rem 2rem;
     display: inline-block;
     border-radius: 56% 44% 70% 30% / 30% 54% 46% 70%;
@@ -882,7 +958,7 @@ main {
     border-radius: 56% 44% 70% 30% / 30% 54% 46% 70%;
     background: transparent;
     animation: water-effect 3s linear infinite;
-    border: 1px solid #77ffff7f;
+    border: 1px solid #9773f984;
 }
 
 @keyframes water-effect {
@@ -911,6 +987,103 @@ main {
     color: var(--dark-grey);
 }
 
+/* ---------------- Projects Section CSS ------------------ */
+
+.projects_section .project_card{    
+    max-width: 400px;
+    max-height: 350px;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: var(--light-navy);
+    /* overflow: hidden; */
+    transition: all .3s ease;
+    position: relative;
+}
+.projects_section .project_card:hover{
+    cursor: pointer;
+    
+}
+
+.projects_section .project_card:hover img{
+    scale: 1.12;
+    opacity: 0.1;
+}
+
+.projects_section .project_card img{
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all .3s ease;
+}
+.projects_section .project_card::before{
+    position: absolute;
+    top: 32.5px;
+    right: -8px;
+    content: '';
+    background: var(--primary-clr);
+    height: 28px;
+    width: 28px;
+    transform : rotate(45deg);
+    z-index: -1;
+  }
+
+.projects_section .project_card:after{
+    position: absolute;
+    content: attr(data-label);
+    top: 11px;
+    right: -14px;
+    padding: 0.5rem;
+    width: 10rem;
+    background: var(--primary-clr);
+    color: white;
+    text-align: center;
+    box-shadow: 4px 4px 15px rgba(26, 35, 126, 0.2);
+}
+
+.projects_section .project_card .card_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: none;
+    opacity: 0;
+    transition: all .5s ease;
+}
+
+.projects_section .project_card .card_content h3{
+    font-size: 2.5rem;
+    color: var(--light);
+}
+
+.projects_section .project_card .card_content p{
+    color: var(--light-grey);
+    margin-top: 1rem;
+}
+
+.projects_section .project_card:hover .card_content{
+    display: block;
+    opacity: 1;
+}
+
+.projects_section .project_card .card_button{
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 5rem;
+    margin-top: 2rem;
+    color: var(--light);
+    border: 2px solid var(--primary-clr);
+    font-weight: 600;
+    transition: all .3s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.projects_section .project_card .card_button:hover{
+    background-color: var(--primary-clr);
+}
+
 /* ---------------- Freelancing Section CSS ------------------ */
 
 
@@ -922,6 +1095,7 @@ main {
     background-size: cover;
     background-attachment: fixed;
     padding: 5rem 0;
+    margin-block: 5rem;
 }
 
 .freelancing_section .overlay{
@@ -944,6 +1118,7 @@ main {
     color: var(--dark-navy);
     margin-bottom: 2rem;
     letter-spacing: 1px;
+  margin-inline: 2rem;
 }
 
 .freelancing_section a{
@@ -964,18 +1139,21 @@ main {
     position: relative;
 }
 
-
-.contact_details{
-    margin-top: 4rem;
-    color: var(--light-grey);
-    display: grid;
-    gap: 2rem;
+.contact-bg img{
+    position: absolute;
+    z-index: -1;
 }
 
-.contact_details span{
-    letter-spacing: 1px;
-    margin-left: 1rem;
+.contact-bg img:nth-child(1){
+    bottom: -5%;
+    left: -5%;
 }
+
+.contact-bg img:nth-child(2){
+    top: -5%;
+    right: 0;
+}
+
 .form_content {
     max-width: 70rem;
     margin-inline: auto;
@@ -985,7 +1163,6 @@ main {
 form {
     display: grid;
     gap: 3.2rem;
-    width: 100%;
 }
 
 form .row1 {
@@ -1007,18 +1184,18 @@ form .row1 {
 .form_group input,
 textarea {
     background-color: var(--med-navy);
-    border: none;
     border-radius: 0.25rem;
     padding: 1rem;
     color: var(--light);
     outline: none;
     border: 2px solid var(--light-navy);
+    width: 100%;
 }
 
 .form_group input:focus,
 .form_group textarea:focus {
-    border: 2px solid #61dafb81;
-    box-shadow: 0 0 0 0.25rem rgb(97 218 251 / 25%);
+    border: 2px solid #9773f980;
+    box-shadow: 0 0 0 0.25rem rgba(151, 115, 249, 25%);
 }
 
 form button[type="submit"]{
@@ -1030,9 +1207,10 @@ form button[type="submit"]{
 /* ---------------- Footer CSS ------------------ */
 
 footer{
-    background-color: var(--med-navy);
+    background-color: var(--nav-bg);
     padding: 3rem;
     align-items: center;
+    position: relative;
 }
 
 footer .left a{
@@ -1083,7 +1261,7 @@ footer .right .sci i{
     height: 5rem;
     font-size: 2rem;
     color: var(--dark-navy);
-    background: #61dafb;
+    background: var(--primary-clr);
     padding: 1.6rem 2rem;
     display: inline-flex;
     align-items: center;

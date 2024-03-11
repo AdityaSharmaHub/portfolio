@@ -15,3 +15,44 @@ const scrollTop = () => {
 }
 
 scrollElement.addEventListener("click", scrollTop);
+
+
+
+// ------------------------- Creating active navlink on scroll functionality  ---------------------------
+
+let sec = document.querySelectorAll('section');
+let links = document.querySelectorAll('nav a');
+
+window.onscroll = ()=>{
+    sec.forEach(section => {
+        let top = window.scrollY;
+        let offset = section.offsetTop - 80;
+        let height = section.offsetHeight;
+        let id = section.getAttribute('id');
+        
+        if(top >= offset && top < offset + height){
+            links.forEach(link => {
+                link.classList.remove('active');
+                document.querySelector('nav a[href*=' + id +']').classList.add('active');
+            })
+        }
+    })
+}
+
+// ------------------------- Navbar change on scroll  ---------------------------
+
+window.addEventListener("scroll", function(){
+    let header = document.querySelector('header');
+    header.classList.toggle("sticky", window.scrollY > 70);
+})
+
+
+
+// ------------------------- Cursor blur  ---------------------------
+
+let cursorBlur = document.querySelector('#cursor_blur');
+
+document.addEventListener("mousemove", function(dets){
+    cursorBlur.style.left = dets.x-150+"px";
+    cursorBlur.style.top = dets.y-150+"px";
+})
